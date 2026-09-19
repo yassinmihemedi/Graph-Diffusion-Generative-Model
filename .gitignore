@@ -1,0 +1,26 @@
+# Data (not distributed with this repo — see README.md for how to obtain)
+graphs/
+
+# Experiment outputs
+wandb/
+logs/
+*.ckpt
+*.pt
+*.pth
+checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Editors / OS
+.vscode/
+.DS_Store
+
+# Misc local artifacts
+.backups/
+*.json.bak
+.env
+node_modules/

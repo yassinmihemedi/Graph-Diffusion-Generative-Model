@@ -1,0 +1,33 @@
+# Core dependencies for the SCR (Structural Candidate Restriction) discrete
+# diffusion model.
+# Verified against actual `import` statements in this repository
+# (2026-09), not copied from the upstream EDGE requirements file.
+#
+# PyTorch, DGL, and PyTorch Geometric are intentionally NOT pinned here —
+# their correct wheel depends on your CUDA version. Install them first,
+# by hand, matching your CUDA toolkit, then run this file for everything
+# else. See install_requirements.sh, which does this in the right order.
+
+numpy
+scipy
+pandas
+networkx
+scikit-learn
+matplotlib
+
+# Graph statistics / kernels used by evaluation metrics (MMD over graph
+# descriptors, NSPDK kernel)
+powerlaw
+pyemd
+eden-kernel   # provides `eden.graph.vectorize`, used for the NSPDK kernel
+
+# Experiment tracking / misc utilities
+wandb
+prettytable
+tqdm
+
+# Only required if you compute the FID-style metric in
+# eval_utils/evaluation/gin_evaluation.py (imported lazily inside the
+# function, so the rest of the codebase runs fine without these):
+tensorflow
+tensorflow-gan
