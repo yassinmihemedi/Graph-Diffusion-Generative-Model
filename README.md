@@ -17,11 +17,7 @@ This repository is a code-only, standalone release. It is a derivative
 work built on top of [EDGE](https://github.com/tufts-ml/graph-generation-EDGE)
 (Chen et al., *"Efficient and Degree-Guided Graph Generation via Discrete
 Diffusion Modeling"*, ICML 2023) — see
-[Licensing and attribution](#licensing-and-attribution). No trained model
-checkpoints and no dataset files are included; no training/analysis
-scripts are included either — this README gives three self-contained
-example commands instead (train on a large graph, train on a small graph,
-evaluate a checkpoint).
+[Licensing and attribution](#licensing-and-attribution).
 
 ## What's in this repository
 
