@@ -1,23 +1,11 @@
-# SCR — Structural Candidate Restriction
+# SCR — Discrete Diffusion for Large Graph Generation via Structural Candidate Restriction
 
-A discrete diffusion model for graph generation that anchors its forward
-and reverse process to structural sufficient statistics of the target
-graph — edge count, triangle count, and degree sequence — rather than
-treating every possible node pair as equally important.
+A discrete diffusion model for large-scale graph generation that restricts its forward and reverse processes to the structural sufficient statistics of the target graph, rather than treating every possible node pair as equally important.
 
-Two ideas drive this: (1) training gradients are restricted to a
-structurally meaningful **candidate edge set** Q = E ∪ W(G) (true edges
-plus their 2-hop wedges) instead of all O(N²) pairs, which is both what
-makes large graphs tractable and where the name comes from; and (2) the
-masking schedule is **degree-adaptive** — higher-degree node pairs are
-revealed earlier in the reverse process, since they carry
-disproportionate structural signal.
 
-This repository is a code-only, standalone release. It is a derivative
-work built on top of [EDGE](https://github.com/tufts-ml/graph-generation-EDGE)
-(Chen et al., *"Efficient and Degree-Guided Graph Generation via Discrete
-Diffusion Modeling"*, ICML 2023) — see
-[Licensing and attribution](#licensing-and-attribution).
+
+This repository contains code and checkpoints for selected datasets. It is a derivative work built on top of [EDGE](https://github.com/tufts-ml/graph-generation-EDGE) (Chen et al., *“Efficient and Degree-Guided Graph Generation via Discrete Diffusion Modeling,”* ICML 2023). See [Licensing and attribution](#licensing-and-attribution) for details.
+
 
 ## What's in this repository
 
@@ -154,7 +142,7 @@ python -u train.py \
 
 ```bash
 python eval_utils/evaluate.py \
-    --run_dir ./wandb/polblogs/multinomial_diffusion/multistep/polblogs_run1 \
+    --run_dir ./selected_checkpoints/polblogs/ \
     --checkpoint_epoch 999 \
     --num_samples 16 \
     --batch_size 4 \
