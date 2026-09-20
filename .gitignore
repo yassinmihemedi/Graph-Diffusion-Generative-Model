@@ -4,7 +4,6 @@
 wandb/
 logs/
 *.ckpt
-*.pt
 *.pth
 checkpoints/
 
