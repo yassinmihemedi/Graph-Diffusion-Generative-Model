@@ -14,6 +14,8 @@ pandas
 networkx
 scikit-learn
 matplotlib
+tensorboard
+
 
 # Graph statistics / kernels used by evaluation metrics (MMD over graph
 # descriptors, NSPDK kernel)

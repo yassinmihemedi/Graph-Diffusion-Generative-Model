@@ -23,6 +23,7 @@ PYTHON_VERSION="3.11"
 CUDA_TAG="cu128"          # change to e.g. cu121, cu118, or "cpu" if needed
 TORCH_VERSION="2.8.0"
 TORCHVISION_VERSION="0.23.0"
+DGL_VERSION="1.1.3"
 
 if ! command -v conda &> /dev/null; then
     echo "ERROR: conda not found on PATH. Install Miniconda/Anaconda first."
@@ -49,14 +50,21 @@ pip install torch-scatter \
 echo "=== Installing torch-geometric ==="
 pip install torch-geometric
 
-echo "=== Installing DGL (${CUDA_TAG}) ==="
-# DGL's own wheel index names CUDA tags without the leading "cu", e.g. "128".
-DGL_CUDA_TAG="${CUDA_TAG#cu}"
-if [ "${CUDA_TAG}" = "cpu" ]; then
-    pip install dgl -f https://data.dgl.ai/wheels/repo.html
-else
-    pip install "dgl" -f "https://data.dgl.ai/wheels/cu${DGL_CUDA_TAG}/repo.html"
-fi
+echo "=== Installing DGL ${DGL_VERSION} ==="
+# Pinned deliberately: DGL >=2.0's `graphbolt` submodule is imported eagerly
+# at `import dgl` time (dgl -> dataloading -> distributed -> graphbolt) and
+# requires `torchdata.datapipes`, an API recent torchdata releases removed —
+# so an unpinned `pip install dgl` can produce a working install today and a
+# broken one (ModuleNotFoundError: torchdata.datapipes) tomorrow, with no
+# code change on our end. 1.1.3 predates graphbolt entirely and is what this
+# codebase was actually verified against.
+#
+# Installed from plain PyPI, not DGL's CUDA-specific wheel index
+# (data.dgl.ai/wheels/cuNNN/repo.html) — that index does not reliably carry
+# every CUDA tag for older releases like 1.1.3 (it did not have a cu128
+# build when this was written), while the plain PyPI wheel works fine with
+# CUDA at runtime and is what the verified working environment actually used.
+pip install "dgl==${DGL_VERSION}"
 
 echo "=== Installing remaining Python dependencies from requirements.txt ==="
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
