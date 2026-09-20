@@ -31,7 +31,7 @@ This repository contains code and checkpoints for selected datasets. It is a der
 ## Quickstart
 
 ```bash
-bash install_requirements.sh          # creates conda env `ergm_xom` + installs everything
+bash install_requirements.sh          # creates conda env `SCR` + installs everything
 conda activate SCR
 ```
 
